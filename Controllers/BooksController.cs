@@ -96,7 +96,5 @@ namespace LibApp.Controllers
             return RedirectToAction("Index", "Books");
         }
 
-
-
     }
 }
