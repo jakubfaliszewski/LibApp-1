@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿ using AutoMapper;
 using LibApp.Data;
 using LibApp.Dtos;
 using LibApp.Interfaces;
@@ -34,6 +34,7 @@ namespace LibApp.Controllers.Api
 
         // GET /api/books
         [HttpGet]
+        [Authorize]
         public IActionResult GetBooks()
         {
             var books = _bookRepository.GetBooks()
@@ -59,6 +60,7 @@ namespace LibApp.Controllers.Api
 
         // POST /api/books
         [HttpPost]
+        [Authorize(Roles = "StoreManager,Owner")]
         public IActionResult Add(Book bookDto)
         {
             if (!ModelState.IsValid)
@@ -74,6 +76,7 @@ namespace LibApp.Controllers.Api
         }
 
         // PUT /api/books
+        [Authorize(Roles = "StoreManager,Owner")]
         [HttpPut("{id}")]
         public void Update(int id, BookDto bookDto)
         {
@@ -93,6 +96,7 @@ namespace LibApp.Controllers.Api
 
         // DELETE /api/books{id}
         [HttpDelete]
+        [Authorize(Roles = "StoreManager,Owner")]
         [Route("{id}")]
         public IActionResult Delete(int id)
         {
